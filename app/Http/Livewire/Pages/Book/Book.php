@@ -18,6 +18,7 @@ class Book extends Component
 
     //init attribute
     public $book_id;
+    public $user_id;
     public $slug;
     public $judul_buku;
     public $nama_penulis;
@@ -34,7 +35,11 @@ class Book extends Component
 
     //init data
     public $data_kategori;
-    public $book_list;
+    public $data_books;
+
+    //source
+    public $from = 'myCollection';
+    public $title = 'Your Book Collection';
 
     protected $listeners = [
         'close-modal' => 'modal_toggle',
@@ -42,14 +47,30 @@ class Book extends Component
     ];
 
     public function mount(){
+        //query kategori
         $this->data_kategori = DB::table('kategori')->get();
-        $this->data_books = DB::table('books')->get();
-        // dd($this->data_kategori);
+
+        //query buku
+        $queryDataBooks = DB::table('books');
+        if($this->from == "myCollection"){
+            $queryDataBooks->where('user_id', Auth::user()->id);
+        }else{
+            $queryDataBooks->where('is_publikasi',true);
+        }
+        $this->data_books = $queryDataBooks->get();
     }
 
     public function hydrate(){
         $this->data_kategori = DB::table('kategori')->get();
-        $this->data_books = DB::table('books')->get();
+
+        //query buku
+        $queryDataBooks = DB::table('books');
+        if($this->from == "myCollection"){
+            $queryDataBooks->where('user_id', Auth::user()->id);
+        }else{
+            $queryDataBooks->where('is_publikasi',true);
+        }
+        $this->data_books = $queryDataBooks->get();
     }
     
     public function render()
@@ -62,7 +83,6 @@ class Book extends Component
 
         if($this->is_show == false){
             $this->clearFields();
-            $this->is_edit = !$this->is_edit;
         }
 
         $this->hydrate();
@@ -72,10 +92,12 @@ class Book extends Component
         if($id != null){
             $detail= BookModel::where('id',$id)->first();
             $this->book_id = $detail->id;
+            $this->user_id = $detail->user_id;
+            $this->nama_penulis = $detail->nama_penulis;
+            $this->user_id = $detail->user_id;
             $this->nama_kategori = $detail->category->nama_kategori;
             $this->judul_buku = $detail->judul_buku;
             $this->slug = $detail->slug;
-            $this->nama_penulis = $detail->nama_penulis;
             $this->isbn = $detail->isbn;
             $this->kategori = $detail->kategori;
             $this->deskripsi = $detail->deskripsi;
@@ -91,7 +113,6 @@ class Book extends Component
 
         if($this->is_show_detail == false){
             $this->clearFields();
-            $this->is_edit = false;
         }
         
         $this->hydrate();
@@ -108,7 +129,6 @@ class Book extends Component
     public function modal_save(){
         $rules = [
             'judul_buku' => 'required|string',
-            'slug' => 'required|string|unique:books',
             'nama_penulis' => 'required|string',
             'isbn' => 'required|string',
             'kategori' => 'required|integer',
@@ -121,6 +141,7 @@ class Book extends Component
 
         // Hanya terapkan validasi 'required' pada 'cover' dan 'file_book' jika is_edit bernilai false
         if (!$this->is_edit) {
+            $rules['slug'] = 'required|string|unique:books';
             $rules['cover'] = 'required|max:10240'; // Ubah maksimum ukuran gambar sesuai kebutuhan
             $rules['file_book'] = 'required|mimes:pdf,epub|max:20480'; // Ubah maksimum ukuran file sesuai kebutuhan
         }   
@@ -146,7 +167,7 @@ class Book extends Component
             }
             BookModel::find($this->book_id)->update([
                 'judul_buku' => $validatedData['judul_buku'],
-                'slug' => $validatedData['slug'],
+                'user_id' => Auth::user()->id,
                 'nama_penulis' => $validatedData['nama_penulis'],
                 'isbn' => $validatedData['isbn'],
                 'kategori' => $validatedData['kategori'],
@@ -164,9 +185,11 @@ class Book extends Component
             // Simpan data buku ke dalam database
             $coverPath = $validatedData['cover']->store('covers', 'public');
             $fileBookPath = $validatedData['file_book']->store('files', 'public');
+
             BookModel::create([
                 'judul_buku' => $validatedData['judul_buku'],
                 'nama_penulis' => $validatedData['nama_penulis'],
+                'user_id' => Auth::user()->id,
                 'isbn' => $validatedData['isbn'],
                 'slug' => $validatedData['slug'],
                 'kategori' => $validatedData['kategori'],
@@ -216,6 +239,7 @@ class Book extends Component
     {
         $this->book_id = '';
         $this->edit = '';
+        $this->slug = '';
         $this->judul_buku = '';
         $this->nama_penulis = '';
         $this->isbn = '';
@@ -227,5 +251,7 @@ class Book extends Component
         $this->is_free = null;
         $this->lisensi = '';
         $this->is_publikasi = null;
+
+        $this->is_edit = false;
     }
 }

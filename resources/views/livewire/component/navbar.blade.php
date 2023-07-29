@@ -22,7 +22,7 @@
               <nav class="navbar navbar-expand-md navbar-light bg-light">
                   <div class="container-fluid">
                       <!-- Logo -->
-                      <a class="navbar-brand" href="#"><img class="logo-icon me-2" src="assets/images/site-logo.svg" alt="logo"><span class="logo-text">Publish Palace</span></a>
+                      <a class="navbar-brand" href="/"><img class="logo-icon me-2" src="assets/images/site-logo.svg" alt="logo"><span class="logo-text">Publish Palace</span></a>
                       <!-- Tombol untuk versi mobile -->
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
@@ -33,28 +33,39 @@
                             @if(request()->is('/'))
                               <!-- Route URL 1 -->
                               <li class="nav-item">
-                                  <button class="nav-link" onclick="scrollToClass('tentang-kami')">tentang kami</button>
+                                  <button class="nav-link" onclick="scrollToClass('tentang-kami')">TENTANG KAMI</button>
                               </li>
                               <!-- Route URL 2 -->
                               <li class="nav-item">
-                                  <a class="nav-link" href="#fitur">Fitur</a>
+                                  <a role="button" class="nav-link"onclick="scrollToClass('fitur')">FITUR</a>
                               </li>
                               <!-- Route URL 3 -->
                               <li class="nav-item">
-                                  <a class="nav-link" href="/route-3">Visi & Misi</a>
+                                  <a role="button" class="nav-link" onclick="scrollToClass('visi-misi')">VISI MISI</a>
                               </li>
                               @if(Auth::user())
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-secondary" href="/dashboard">Dashboard</a>
+                                <li class="nav-item mx-3 ml-3">
+                                    <a role="button" class="nav-link btn btn-secondary" href="/dashboard">DASHBOARD</a>
+                                </li>
+                                <li class="nav-item ml-5">
+                                  <a role="button" class="nav-link btn btn-primary" href="/logout" style="width: 10rem">Logout</a>
                                 </li>
                               @endif
                             @else
                             <li class="nav-item">
-                              <a class="nav-link" href="/dashboard">Dashboard</a>
+                              <a role="button" class="nav-link" href="/dashboard">DASHBOARD</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="/book">Book</a>
+                              <a role="button" class="nav-link" href="/book">MY BOOK</a>
                             </li>
+                            <li class="nav-item">
+                              <a role="button" class="nav-link" href="/explore-book">EXPLORE BOOK</a>
+                            </li>
+                            @if(Auth::user())
+                              <li class="nav-item ml-5">
+                                <a role="button" class="nav-link btn btn-primary" href="/logout" style="width: 10rem">Logout</a>
+                              </li>
+                          @endif
                             @endif
                           </ul>
                       </div>

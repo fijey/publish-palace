@@ -17,6 +17,7 @@ class Main extends Component
 
     //init attribute
     public $book_id;
+    public $user_id;
     public $slug;
     public $judul_buku;
     public $nama_penulis;
@@ -51,6 +52,7 @@ class Main extends Component
         if($id != null){
             $detail= BookModel::where('id',$id)->first();
             $this->book_id = $detail->id;
+            $this->user_id = $detail->user_id;
             $this->judul_buku = $detail->judul_buku;
             $this->slug = $detail->slug;
             $this->nama_penulis = $detail->nama_penulis;
@@ -80,6 +82,7 @@ class Main extends Component
     public function clearFields()
     {
         $this->book_id = '';
+        $this->user_id = '';
         $this->edit = '';
         $this->judul_buku = '';
         $this->nama_penulis = '';

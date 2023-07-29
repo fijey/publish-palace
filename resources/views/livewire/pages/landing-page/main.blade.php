@@ -181,7 +181,7 @@ use App\Helper\PPHelper;
         </div><!--//container-->
       </section><!--//hero-section-->
       
-      <section id="benefits-section" class="benefits-section theme-bg-light-gradient py-5">
+      <section id="benefits-section" class="benefits-section theme-bg-light-gradient py-5 fitur">
         <div class="container py-5">
           <h2 class="section-heading text-center mb-3">KENAPA HARUS PUBLISH DI SINI?</h2>
           <div class="section-intro single-col-max mx-auto text-center mb-5">Dengan mempublikasi di platform kami, kamu akan mendapatkan berbagai keuntungan fitur menarik, diantaranya</div>
@@ -289,7 +289,7 @@ use App\Helper\PPHelper;
         </div><!--//container-->
       </section><!--//content-section-->
        --}}
-      <section id="audience-section" class="audience-section py-5">
+      <section id="audience-section" class="audience-section py-5 visi-misi">
         <div class="container">
           <h2 class="section-heading text-center mb-4">Visi</h2>
           <div class="section-intro single-col-max mx-auto text-center mb-5">
@@ -505,8 +505,11 @@ use App\Helper\PPHelper;
       <section id="audience-section" class="audience-section py-5">
           <div class="container">
             <h4 class="text-center">
-              Koleksi Buku Terbaru Dari Komunitas
+              5 Koleksi Buku Terbaru Dari Komunitas
             </h4>
+            <h6 class="text-center">
+              Login ke Platform untuk explore lebih banyak buku
+            </h6>
             <div class="row">
                 @forelse ($data_books as $item)
                     <div class="col-sm-6 col-md-6 col-lg-2 d-flex justify-content-center" wire:click="modal_detail_toggle({{@$item->id}})" role="button">
@@ -525,6 +528,12 @@ use App\Helper\PPHelper;
             </div>
           </div>
       </section>
+
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <a href="/login" class="btn btn-primary">LOGIN SEKARANG</a>
+        </div>
+      </div>
       
       </main>
         <!-- Modal Detail Buku -->
@@ -554,13 +563,13 @@ use App\Helper\PPHelper;
                                     <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Kategori</strong></div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_kategori}}</div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Harga</strong></div>
-                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{PPHelper::formatCurrency($harga)}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$harga ? PPHelper::formatCurrency($harga) : ''}}</div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free ? 'Ya, Ini Gratis' : 'Tidak Gratis'}}</div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Lisensi</strong></div>
                                     <div class="col-sm-12 col-md-6 text-center text-md-start">{{$lisensi}}</div>
-                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div>
-                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi ? 'Sudah Di Publikasi' : 'Draft'}}</div>
+                                    {{-- <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div> --}}
+                                    {{-- <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi ? 'Sudah Di Publikasi' : 'Draft'}}</div> --}}
                                   </div>
                               </div>
                               <div class="col-sm-12 mt-4 mt-md-2">
@@ -572,9 +581,11 @@ use App\Helper\PPHelper;
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" wire:click="modal_detail_toggle(false)">Tutup</button>
-                      <a type="button" href="{{route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
-                      {{-- 
-                      <button type="button" class="btn btn-danger" wire:click="delete_book()">Hapus</button> --}}
+                      @if($is_free == true || $user_id == @Auth::user()->id)
+                      <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
+                      @else
+                      <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-success" target="_blank"><span class="fas fa-lock"></span> &nbsp;&nbsp; Beli</a>
+                      @endif
                   </div>
               </div>
           </div>
