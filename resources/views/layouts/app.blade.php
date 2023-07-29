@@ -1,56 +1,64 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Publish Palace - Write, Publish, Inspire</title>
+    
+    <!-- Meta -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:700|Roboto:400,400i,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="{{asset('assets/fontawesome/js/all.min.js')}}"></script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Theme CSS -->  
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <title>Hello, world!</title>
+    <link id="theme-style" rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
+    <link id="theme-style" rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <style>
-              @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-              body{
-                font-family: Poppins, 'Arial';
-              }
-              .bg-primary-pp{
-                background-color: #1e3b5d;
-                color: #ffc107;
-              }
-              .bg-secondary-pp{
-                color: #1e3b5d;
-                background-color: #ffc107;
-              }
-              
-
-              .mt-8{
-                margin-top: 8rem;
-              }
+      .toastify .on  .toastify-right .toastify-top{
+        background-color: "linear-gradient(to right, #ff7533, #ff7533))" !important,
+      }
     </style>
-    @livewireStyles
-  </head>
-  <body>
-      @yield('content')
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-   
-    <!-- Optional JavaScript; choose one of the two! -->
+  @livewireStyles
+</head> 
+
+<body>    
+    @yield('content')
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
     
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
     
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <footer class="footer">
+
+	    <div class="footer-bottom text-center py-5">
+
+	        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Publish Palace</small>
+ 
+	    </div>
+	    
+    </footer>
+       
+    <!-- Javascript -->          
+    <script src="{{asset('assets/plugins/popper.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script> 
+    <script src="{{asset('assets/plugins/smoothscroll.min.js')}}"></script> 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
     <script>
-        document.addEventListener('show-toast', function (toast) {
+           document.addEventListener('show-toast', function (toast) {
             console.log(toast);
             Toastify({
                 text: toast.detail.text,
@@ -62,12 +70,12 @@
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "linear-gradient(to right, #037D92, #037D92))",
+                    'color' : "white"
                 },
                 onClick: function(){} // Callback after click
                 }).showToast();
         });
     </script>
     @livewireScripts
-  </body>
-</html>
+</body>
+</html> 

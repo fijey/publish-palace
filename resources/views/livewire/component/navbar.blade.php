@@ -16,52 +16,49 @@
               </ul>
             </div> --}}
 
-            <nav class="navbar navbar-expand-md navbar-light fixed-top bg-primary-pp">
-                <div class="container-fluid">
-                  <span class="text-white">PUBLISH PALACE</span>
-                    {{-- <img src="{{asset('assets/new-logo.png')}}" alt="logo" width="40" height="40" class="rounded-circle"> --}}
-                  <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0 mx-auto">
-                      @if(request()->is('/'))
-                      <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Link</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-light disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                      </li>
-                        @if(auth()->user())
-                          <li class="nav-item">
-                            <a class="nav-link text-light active" aria-current="page" href="/dashboard">Dashboard</a>
-                          </li>
-                        @else
-                          <li class="nav-item">
-                            <a class="nav-link text-light active" aria-current="page" href="#">Login</a>
-                          </li>
-                        @endif
-                      @else
-                      <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Profile</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Book</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Withdraw</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Notification</a>
-                      </li>
-                      </ul>                      
-                        <a class="btn bg-secondary-pp" aria-current="page" href="#">Logout</a>
-                      @endif
-                    {{-- </ul> --}}
-                  </div>
-                </div>
+            
+
+            <header class="bg-light w-100" style="position: fixed; top:0; z-index:2">
+              <nav class="navbar navbar-expand-md navbar-light bg-light">
+                  <div class="container-fluid">
+                      <!-- Logo -->
+                      <a class="navbar-brand" href="#"><img class="logo-icon me-2" src="assets/images/site-logo.svg" alt="logo"><span class="logo-text">Publish Palace</span></a>
+                      <!-- Tombol untuk versi mobile -->
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <!-- Menu navigasi -->
+                      <div class="collapse navbar-collapse" id="navbarNav">
+                          <ul class="navbar-nav ms-auto">
+                            @if(request()->route('/'))
+                              <!-- Route URL 1 -->
+                              <li class="nav-item">
+                                  <a class="nav-link" href="/#tentang-kami">tentang kami</a>
+                              </li>
+                              <!-- Route URL 2 -->
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#fitur">Fitur</a>
+                              </li>
+                              <!-- Route URL 3 -->
+                              <li class="nav-item">
+                                  <a class="nav-link" href="/route-3">Visi & Misi</a>
+                              </li>
+                              @if(Auth::user())
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-secondary" href="/dashboard">Dashboard</a>
+                                </li>
+                              @endif
+                            @else
+                            <li class="nav-item">
+                              <a class="nav-link" href="/dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="/book">Book</a>
+                            </li>
+                            @endif
+                          </ul>
+                      </div>
+                  </div><!--//container-fluid-->
               </nav>
+            </header>
 </div>

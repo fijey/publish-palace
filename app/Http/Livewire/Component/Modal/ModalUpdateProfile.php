@@ -16,6 +16,7 @@ class ModalUpdateProfile extends Component
 
     //props like slot
     public $modalBody;
+    public $title;
 
     public $is_show = false;
     protected $listeners = ['open-modal' => 'modal_toggle'];

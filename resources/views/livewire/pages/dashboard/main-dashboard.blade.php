@@ -49,6 +49,7 @@
         .data h2{
         font-size: 33px;
         font-weight: 600;
+        color: #fff;
         }
         span{
         font-size: 18px;
@@ -82,7 +83,7 @@
   </style>
     {{-- desktop --}}
     <section class="main container d-none d-md-block">
-        <div class="profile-card mt-8 mx-auto">
+        <div class="profile-card mt-8 mx-auto bg-primary text-light">
           <div class="image">
             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png" alt="" class="profile-pic">
           </div>
@@ -98,20 +99,20 @@
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4 info">
-              <h3>Following</h3>
+              <h3 style="color: #fff">Following</h3>
               <span>120</span>
             </div>
             <div class="col-sm-12 col-md-4 info">
-              <h3>Followers</h3>
+              <h3 style="color: #fff">Followers</h3>
               <span>5000</span>
             </div>
             <div class="col-sm-12 col-md-4 info">
-              <h3>Posts</h3>
+              <h3 style="color: #fff">Posts</h3>
               <span>209</span>
             </div>
           </div>
-          <div class="buttons">
-            <a href="#" class="btn bg-secondary-pp" wire:click="modal_toggle()">Edit Profile</a>
+          <div>
+            <a href="#" class="btn btn-secondary" wire:click="modal_toggle()">Edit Profile</a>
           </div>
         </div>
     </section>
@@ -156,8 +157,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="buttons d-block">
-                      <a href="#" class="btn bg-secondary-pp" wire:click="modal_toggle()">Edit Profile</a>
+                    <div class=" d-block">
+                      <a href="#" class="btn btn-secondary" wire:click="modal_toggle()">Edit Profile</a>
                     </div>
                 </div>
             </div>
@@ -165,6 +166,9 @@
     </section>
 
     <x-modal>
+        @slot('title')
+          Update Profile    
+        @endslot
                     <form>
                     <!-- Input Nama -->
                     <div class="form-group">
