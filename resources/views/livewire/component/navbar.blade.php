@@ -30,10 +30,10 @@
                       <!-- Menu navigasi -->
                       <div class="collapse navbar-collapse" id="navbarNav">
                           <ul class="navbar-nav ms-auto">
-                            @if(request()->route('/'))
+                            @if(request()->is('/'))
                               <!-- Route URL 1 -->
                               <li class="nav-item">
-                                  <a class="nav-link" href="/#tentang-kami">tentang kami</a>
+                                  <button class="nav-link" onclick="scrollToClass('tentang-kami')">tentang kami</button>
                               </li>
                               <!-- Route URL 2 -->
                               <li class="nav-item">

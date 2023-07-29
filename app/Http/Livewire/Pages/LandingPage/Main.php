@@ -22,6 +22,7 @@ class Main extends Component
     public $nama_penulis;
     public $isbn;
     public $kategori;
+    public $nama_kategori;
     public $deskripsi;
     public $cover;
     public $file_book;
@@ -55,6 +56,7 @@ class Main extends Component
             $this->nama_penulis = $detail->nama_penulis;
             $this->isbn = $detail->isbn;
             $this->kategori = $detail->kategori;
+            $this->nama_kategori = $detail->category->nama_kategori;
             $this->deskripsi = $detail->deskripsi;
             $this->cover = $detail->cover;
             $this->file_book = $detail->file_book;

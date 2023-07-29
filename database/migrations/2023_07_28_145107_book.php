@@ -19,7 +19,7 @@ class Book extends Migration
             $table->string('nama_penulis');
             $table->string('isbn');
             $table->integer('kategori');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->string('cover');
             $table->string('file_book');
             $table->string('harga');

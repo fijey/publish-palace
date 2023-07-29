@@ -52,6 +52,7 @@
     </footer>
        
     <!-- Javascript -->          
+    <script src="{{asset('assets/dflip/js/libs/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/popper.min.js')}}"></script>
     <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script> 
     <script src="{{asset('assets/plugins/smoothscroll.min.js')}}"></script> 
@@ -75,6 +76,15 @@
                 onClick: function(){} // Callback after click
                 }).showToast();
         });
+
+        function scrollToClass(className) {
+            var element = $("." + className);
+            if (element.length > 0) {
+                $("html, body").animate({
+                    scrollTop: element.offset().top
+                }, 800); // You can adjust the scrolling speed (in milliseconds) as needed
+            }
+        }
     </script>
     @livewireScripts
 </body>

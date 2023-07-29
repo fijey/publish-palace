@@ -1,3 +1,6 @@
+@php 
+use App\Helper\PPHelper;
+@endphp
 <div>
     <style>
         /* Styling untuk judul h1 */
@@ -96,7 +99,7 @@
                   SELAMAT DATANG DI <br>PLATFORM PUBLISH PALACE   
                 </h1><!--//headline-->
                 <div class="subheadline mb-4">
-                  Selamat datang di istana penerbitan yang megah, tempat di mana kata-kata menjadi karya yang mengagumkan. 
+                  Tempat di mana kata-kata menjadi karya yang mengagumkan. 
                   
                 </div><!--//subheading-->
                 
@@ -467,7 +470,7 @@
         </div><!--//container-->
       </section><!--//reviews-section-->
        --}}
-      <section id="author-section" class="author-section section theme-bg-primary py-5">
+      <section id="author-section" class="author-section section theme-bg-primary py-5 tentang-kami">
         <div class="container py-3">
           <div class="author-profile text-center mb-5">
             {{-- <img class="author-pic" src="assets/images/profiles/author-profile.png" alt="image" > --}}
@@ -542,22 +545,22 @@
                               </div>
                               <div class="col-sm-12 mt-4 col-md-9 mt-md-0 d-flex justify-content-start">
                                   <div class="row">
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Nama</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_penulis}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Judul</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start ">{{$judul_buku}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>ISBN</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start ">{{$isbn}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Kategori</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$kategori}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Harga</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$harga}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Lisensi</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$lisensi}}</div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div>
-                                      <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Nama</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_penulis}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Judul</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start ">{{$judul_buku}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>ISBN</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start ">{{$isbn}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Kategori</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_kategori}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Harga</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{PPHelper::formatCurrency($harga)}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free ? 'Ya, Ini Gratis' : 'Tidak Gratis'}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Lisensi</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$lisensi}}</div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div>
+                                    <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi ? 'Sudah Di Publikasi' : 'Draft'}}</div>
                                   </div>
                               </div>
                               <div class="col-sm-12 mt-4 mt-md-2">
@@ -569,7 +572,8 @@
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" wire:click="modal_detail_toggle(false)">Tutup</button>
-                      {{-- <button type="button" class="btn btn-primary" wire:click="modal_edit_toggle()">Edit</button>
+                      <a type="button" href="{{route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
+                      {{-- 
                       <button type="button" class="btn btn-danger" wire:click="delete_book()">Hapus</button> --}}
                   </div>
               </div>

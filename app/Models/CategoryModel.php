@@ -5,17 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookModel extends Model
+class CategoryModel extends Model
 {
     use HasFactory;
 
-    protected $table="books";
+    protected $table="kategori";
     protected $guarded = ['id'];
-
-    public function category()
-    {
-        return $this->belongsTo(CategoryModel::class, 'kategori', 'id');
-    }
-
-    
 }

@@ -184,7 +184,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="myModalLabel">{{$judul_buku}}</h5>
-                        <a class="close" data-dismiss="modal" aria-label="Close" wire:click="modal_detail_toggle(false)">
+                        <a class="close" role="button" data-dismiss="modal" aria-label="Close" wire:click="modal_detail_toggle(false)">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
@@ -203,15 +203,15 @@
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>ISBN</strong></div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start ">{{$isbn}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Kategori</strong></div>
-                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$kategori}}</div>
+                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_kategori}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Harga</strong></div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start">{{$harga}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
-                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free}}</div>
+                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free ? 'Ya, Ini Gratis' : 'Tidak Gratis'}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Lisensi</strong></div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start">{{$lisensi}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div>
-                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi}}</div>
+                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_publikasi ? 'Sudah Di Publikasi' : 'Draft'}}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 mt-4 mt-md-2">
@@ -222,6 +222,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <a type="button" target="_blank" class="btn btn-success" href="{{route('book.show',$slug ?? 123)}}">Lihat Karya</a>
                         <button type="button" class="btn btn-secondary" wire:click="modal_detail_toggle(false)">Tutup</button>
                         <button type="button" class="btn btn-primary" wire:click="modal_edit_toggle()">Edit</button>
                         <button type="button" class="btn btn-danger" wire:click="delete_book()">Hapus</button>

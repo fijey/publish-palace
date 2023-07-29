@@ -23,6 +23,7 @@ class Book extends Component
     public $nama_penulis;
     public $isbn;
     public $kategori;
+    public $nama_kategori;
     public $deskripsi;
     public $cover;
     public $file_book;
@@ -71,6 +72,7 @@ class Book extends Component
         if($id != null){
             $detail= BookModel::where('id',$id)->first();
             $this->book_id = $detail->id;
+            $this->nama_kategori = $detail->category->nama_kategori;
             $this->judul_buku = $detail->judul_buku;
             $this->slug = $detail->slug;
             $this->nama_penulis = $detail->nama_penulis;
@@ -206,6 +208,8 @@ class Book extends Component
           $this->is_show_detail = !$this->is_show_detail;
           $this->hydrate();
           $this->render();
+
+          $this->clearFields();
     }
 
     public function clearFields()
