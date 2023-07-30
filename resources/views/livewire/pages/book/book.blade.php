@@ -154,11 +154,25 @@
                             <label for="cover" class="form-label">Cover</label>
                             <input type="file" class="form-control" id="cover" wire:model.debounce.1000ms="cover" required>
                             @error('cover') <span class="text-danger mt-2">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div wire:loading wire:target="cover" class="spinner-grow mx-auto" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="file_book" class="form-label">File Buku</label>
                             <input type="file" class="form-control" id="file_book" wire:model.debounce.1000ms="file_book" required>
                             @error('file_book') <span class="text-danger mt-2">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div wire:loading wire:target="file_book" class="spinner-grow mx-auto" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>

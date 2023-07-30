@@ -10,6 +10,8 @@ class Login extends Component
 {
     public $is_login = true;
 
+    public $is_loading = false;
+
     public $name;
     public $email;
     public $password;
@@ -27,6 +29,7 @@ class Login extends Component
 
     public function login()
     {
+        $this->is_loading = true;
         // Validasi input
         $this->validate([
             'email' => 'required|email',
@@ -47,6 +50,8 @@ class Login extends Component
             $toast = ToastHelper::makeToast("Failed Credential");
             $this->dispatchBrowserEvent('show-toast',$toast);
         }
+
+        $this->is_loading = false;
     }
 
     public function storeRegister(){

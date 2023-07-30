@@ -89,6 +89,10 @@
                 }, 800); // You can adjust the scrolling speed (in milliseconds) as needed
             }
         }
+        function hideElement(idName) {
+            var element = $("#" + idName);
+           element.hide();
+        }
     </script>
     @livewireScripts
 </body>

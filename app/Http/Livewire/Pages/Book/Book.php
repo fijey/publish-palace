@@ -21,6 +21,9 @@ class Book extends Component
     public $is_edit = false;
     public $is_purchasing = false;
 
+    public $is_loading_cover = false;
+    public $is_loading_book = false;
+
     //init attribute
     public $book_id;
     public $user_id;
@@ -49,6 +52,7 @@ class Book extends Component
 
     protected $listeners = [
         'close-modal' => 'modal_toggle',
+        'upload:generatedSignedUrl' => 'updatingFileBook'
         // 'render' => 'render'
     ];
 
@@ -312,5 +316,35 @@ class Book extends Component
         $this->is_publikasi = null;
 
         $this->is_edit = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///loading component
+
+    public function updatingCover(){
+        $this->is_loading_cover = true;
+    }
+    public function updatedCover(){
+        $this->is_loading_cover = false;
+    }
+    public function updatingFileBook(){
+        $this->is_loading_book = true;
+    }
+    public function updatedFileBook(){
+        $this->is_loading_book = false;
     }
 }

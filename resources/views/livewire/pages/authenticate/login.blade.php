@@ -6,7 +6,7 @@
             <div class="card bg-primary">
               <div class="card-body">
                 <h2 class="card-title text-center text-light">Login</h2>
-                <form>
+                <form wire:submit.prevent="login">
                   <!-- Your login form fields here -->
                   <div class="mb-3">
                     <label for="loginEmail" class="form-label text-light text-light">Email address</label>
@@ -18,7 +18,19 @@
                     <input wire:model.debounce.2000ms="password" type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
                     @error('password') <span class="text-danger mt-2">{{ $message }}</span> @enderror
                   </div>
-                  <button type="button" class="btn btn-secondary d-block mx-auto" wire:click="login()">Login</button>
+
+                  <div id="btn-loading" onclick="hideElement('btn-loading')">
+                    <button wire:loading.remove type="submit" class="btn btn-secondary d-block mx-auto" >Login</button>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                      <button wire:loading wire:target="login" class="btn btn-secondary" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                      </button>
+                    </div>
+                  </div>
+
                   <div class="row text-center mt-2">
                       <a role="button" class="text-light" wire:click="is_login()">Daftar Disini Jika Belum Memiliki Account</a>
                   </div>
