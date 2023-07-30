@@ -6,6 +6,8 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ExploreBookController;
+use App\Http\Controllers\PurchasedBookController;
+use App\Http\Controllers\TransactionBookController;
 // ...
 
 
@@ -31,4 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/book/{id}', [BookController::class, 'show'])->name('book.show');
 
     Route::get('/explore-book', [ExploreBookController::class, 'index'])->name('explore-book.index');
+
+    Route::get('/purchased-book', [PurchasedBookController::class, 'index'])->name('purchased-book.index');
+
+    Route::get('/transaction-book', [TransactionBookController::class, 'index'])->name('transaction-book.index');
 });

@@ -25,6 +25,10 @@
       .toastify .on  .toastify-right .toastify-top{
         background-color: "linear-gradient(to right, #ff7533, #ff7533))" !important,
       }
+
+      .mt-6{
+        margin-top: 6rem;
+      }
     </style>
   @livewireStyles
 </head> 

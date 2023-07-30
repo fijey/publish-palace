@@ -61,6 +61,12 @@
                             <li class="nav-item">
                               <a role="button" class="nav-link" href="/explore-book">EXPLORE BOOK</a>
                             </li>
+                            <li class="nav-item">
+                              <a role="button" class="nav-link" href="/purchased-book">PURCHASED BOOK</a>
+                            </li>
+                            <li class="nav-item">
+                              <a role="button" class="nav-link" href="/transaction-book">TRANSACTION BOOK</a>
+                            </li>
                             @if(Auth::user())
                               <li class="nav-item ml-5">
                                 <a role="button" class="nav-link btn btn-primary" href="/logout" style="width: 10rem">Logout</a>
