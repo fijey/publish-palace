@@ -46,6 +46,9 @@ class Book extends Component
     public $data_books;
     public $transaction;
 
+    //digunakan untuk melihat buku yang dibeli
+    public $purchased;
+
     //source
     public $from = 'myCollection';
     public $title = 'Your Book Collection';
@@ -129,6 +132,13 @@ class Book extends Component
             $this->is_free = $detail->is_free;
             $this->lisensi = $detail->lisensi;
             $this->is_publikasi = $detail->is_publikasi;
+
+            if($this->from != "myCollection"){
+                $this->purchased = Transaction::where('book_id', $detail->id)->where('user_id', Auth::user()->id)->where('status', 'PAID')->first() ?? null;
+                $this->is_free = true;
+            }else{
+                $this->purchased = null;
+            }
         }
 
         $this->is_show_detail = !$this->is_show_detail;

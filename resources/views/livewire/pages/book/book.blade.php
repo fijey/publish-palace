@@ -251,8 +251,8 @@
                                         <div class="col-sm-12 col-md-6 text-center text-md-start">{{$nama_kategori}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Harga</strong></div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start">{{$harga}}</div>
-                                        <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
-                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free ? 'Ya, Ini Gratis' : 'Tidak Gratis'}}</div>
+                                        {{-- <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Apakah Gratis?</strong></div>
+                                        <div class="col-sm-12 col-md-6 text-center text-md-start">{{$is_free ? 'Ya, Ini Gratis' : 'Tidak Gratis'}}</div> --}}
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Lisensi</strong></div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start">{{$lisensi}}</div>
                                         <div class="col-sm-12 col-md-6 text-center text-md-start"><strong>Status</strong></div>
@@ -263,6 +263,12 @@
                                     <h5 class="text-center">Book Description</h5>
                                     <p>{{$deskripsi}}</p>
                                 </div>
+                                @if($purchased != null)
+                                    <div class="col-sm-12 mt-4 mt-md-2 text-success">
+                                        <p>Kamu Membeli Buku Ini Pada : {{$purchased->dibayar_pada}}</p>
+                                        <p>Terimakasih Sudash Support Penulis di Indonesia!</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
