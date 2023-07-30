@@ -74,7 +74,7 @@
                     'color' : "white"
                 },
                 onClick: function(){} // Callback after click
-                }).showToast();
+                },2000).showToast();
         });
 
         function scrollToClass(className) {

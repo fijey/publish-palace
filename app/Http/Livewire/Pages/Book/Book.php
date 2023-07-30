@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Pages\Book;
 
 use Livewire\Component;
 use App\Models\BookModel;
+use App\Models\Transaction;
 use Livewire\WithFileUploads; // Import namespace trait
 use DB;
 use App\Http\Livewire\Helper\ToastHelper;
 use Auth;
+use Xendit\Xendit;
+use DateTime;
+use DateTimeZone;
 
 class Book extends Component
 {
@@ -15,6 +19,7 @@ class Book extends Component
     public $is_show = false;
     public $is_show_detail = false;
     public $is_edit = false;
+    public $is_purchasing = false;
 
     //init attribute
     public $book_id;
@@ -36,6 +41,7 @@ class Book extends Component
     //init data
     public $data_kategori;
     public $data_books;
+    public $transaction;
 
     //source
     public $from = 'myCollection';
@@ -123,6 +129,13 @@ class Book extends Component
         $this->is_show = !$this->is_show;
         $this->is_show_detail = !$this->is_show_detail;
         $this->is_edit = !$this->is_edit;
+
+    }
+    public function modal_pembayaran_toggle(){
+        $this->is_show = false;
+        $this->is_show_detail = false;
+        $this->is_edit = false;
+        $this->is_purchasing = false;
 
     }
 
@@ -233,6 +246,52 @@ class Book extends Component
           $this->render();
 
           $this->clearFields();
+    }
+
+    public function purchase_book(){
+
+        $book_id = $this->book_id;
+        $user_id = Auth::user()->id;
+        $urutan = Transaction::count();
+        $tanggal = date('Ymd');
+
+        $data = new \stdClass();
+        // Membuat kode pembayaran dengan menggabungkan tanggal, ID buku, dan ID transaksi
+        $data->kode_pembayaran = 'PP' . '.' . $tanggal . '.' . $user_id . '.' . $book_id . '.' . $urutan;
+        $data->amount = $this->harga;
+        $data->book_id = $book_id;
+        $data->user_id = $user_id;
+        $data->urutan = $urutan;
+        $data->name = Auth::user()->name;
+        $data->email = Auth::user()->email;
+        $data->judul_buku = $this->judul_buku;
+
+        $fix_data = $data;
+
+        $create_invoice =  app('App\Http\Controllers\XenditController')->generateInvoice($fix_data);
+
+        $date_ex = new DateTime($create_invoice['expiry_date']);
+        $date_created = new DateTime($create_invoice['created']);
+
+        $transaction = new Transaction;
+        $transaction->book_id = $data->book_id;
+        $transaction->user_id = $data->user_id;
+        $transaction->kode_pembayaran = $data->kode_pembayaran;
+        $transaction->status = $create_invoice['status'];
+        $transaction->url_pembayaran = $create_invoice['invoice_url'];
+        $transaction->kadaluarsa_pada = $date_ex->setTimezone(new DateTimeZone('Asia/Jakarta'))->format('Y-m-d H:i:s');
+        $transaction->save();
+
+        $this->transaction = $transaction;
+        $this->is_purchasing = true;
+        $this->is_show_detail = false;
+        $toast = ToastHelper::makeToast("Invoice Berhasil Dibuat, Mohon Tunggu Hingga Jendela Pembayaran Terbuka");
+        $this->dispatchBrowserEvent('show-toast', $toast);
+
+
+        $toast = ToastHelper::makeToast("Jika Jendela Tidak Sengaja Tertutup, Kamu Dapat Mengaksesnya Di Halaman My Purchased",5000);
+        $this->dispatchBrowserEvent('show-toast', $toast);
+
     }
 
     public function clearFields()

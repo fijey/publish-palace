@@ -249,7 +249,39 @@
                         @if($is_free == true || $user_id == Auth::user()->id)
                         <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
                         @else
-                        <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-success" target="_blank"><span class="fas fa-lock"></span> &nbsp;&nbsp; Beli</a>
+                        <a wire:click="purchase_book()" type="button" class="btn btn-success" target="_blank"><span class="fas fa-lock"></span> &nbsp;&nbsp; Beli</a>
+                        @endif
+
+                        @if($from == "myCollection")
+                            <button type="button" class="btn btn-primary" wire:click="modal_edit_toggle()">Edit</button>
+                            <button type="button" class="btn btn-danger" wire:click="delete_book()">Hapus</button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Modal Pembayaran -->
+        <div class="modal fade {{$is_purchasing == true ? 'show' : ''}}" style="{{$is_purchasing == true ? 'background-color: #00000073;display:block' : 'display:none'}}" id="modalBookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">{{$judul_buku}}</h5>
+                        <a class="close" role="button" data-dismiss="modal" aria-label="Close" wire:click="modal_pembayaran_toggle(false)">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="w-100 h-100">
+                            <iframe class="w-100 h-100" src="{{@$transaction->url_pembayaran}}" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" wire:click="modal_pembayaran_toggle(false)">Tutup</button>
+                        @if($is_free == true || $user_id == Auth::user()->id)
+                        <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
+                        @else
+                        {{-- <a type="button" class="btn btn-success" target="_blank"><span class="fas fa-lock"></span> &nbsp;&nbsp; Beli</a> --}}
                         @endif
 
                         @if($from == "myCollection")
