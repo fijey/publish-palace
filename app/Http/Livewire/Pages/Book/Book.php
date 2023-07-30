@@ -156,7 +156,7 @@ class Book extends Component
         if (!$this->is_edit) {
             $rules['slug'] = 'required|string|unique:books';
             $rules['cover'] = 'required|max:10240'; // Ubah maksimum ukuran gambar sesuai kebutuhan
-            $rules['file_book'] = 'required|mimes:pdf,epub|max:20480'; // Ubah maksimum ukuran file sesuai kebutuhan
+            $rules['file_book'] = 'required|mimes:pdf,epub|max:1000480'; // Ubah maksimum ukuran file sesuai kebutuhan
         }   
 
         $validatedData = $this->validate($rules);
