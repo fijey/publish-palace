@@ -2,5 +2,5 @@
 
 @section('content')
      <livewire:component.navbar></livewire:component.navbar>   
-     <livewire:pages.purchased-book.purchased-book /></livewire:pages.purchased-book.purchased-book/>
+     <livewire:pages.book.book from='purchased' title="Purchased Collection"/></livewire:pages.book.book/>
 @endsection

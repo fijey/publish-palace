@@ -67,6 +67,12 @@ class Book extends Component
         }else{
             $queryDataBooks->where('is_publikasi',true);
         }
+
+        if($this->from == "purchased"){
+            $queryDataBooks = DB::table('transactions')->where('status','PAID')->where('transactions.user_id', Auth::user()->id)
+            ->leftJoin('books', 'books.id', 'transactions.book_id');
+        }
+
         $this->data_books = $queryDataBooks->get();
     }
 
@@ -80,6 +86,12 @@ class Book extends Component
         }else{
             $queryDataBooks->where('is_publikasi',true);
         }
+
+        if($this->from == "purchased"){
+            $queryDataBooks = DB::table('transactions')->where('status','PAID')->where('transactions.user_id', Auth::user()->id)
+            ->leftJoin('books', 'books.id', 'transactions.book_id');
+        }
+
         $this->data_books = $queryDataBooks->get();
     }
     

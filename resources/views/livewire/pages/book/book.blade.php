@@ -55,7 +55,15 @@
                             </span>
                         </h6>
                     </div>
-                    @else
+                @elseif(strtolower($from) == "purchased")
+                    <div class="col-12 d-flex justify-content-center">
+                        <h6>
+                            <span class="text-muted">
+                                Terimakasih Sudah Support Para Penulis Hebat<br> 
+                            </span>
+                        </h6>
+                    </div>
+                @else
                     <div class="col-12 d-flex justify-content-center">
                         <h6>
                             <span class="text-muted">
@@ -260,7 +268,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="modal_detail_toggle(false)">Tutup</button>
-                        @if($is_free == true || $user_id == Auth::user()->id)
+                        @if($is_free == true || $user_id == Auth::user()->id ||$from == "purchased")
                         <a type="button" href="{{!Auth::user() ? route('login'):route('book.show',$slug??123)}}" class="btn btn-primary" target="_blank">Lihat Karya</a>
                         @else
                         <a wire:click="purchase_book()" type="button" class="btn btn-success" target="_blank"><span class="fas fa-lock"></span> &nbsp;&nbsp; Beli</a>

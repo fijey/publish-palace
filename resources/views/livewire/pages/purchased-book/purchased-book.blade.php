@@ -8,7 +8,7 @@
             </div>
             <div class="col-12 d-flex justify-content-center">
                 <h6>
-                    EXPLORE BUKU YANG SUDAH KAMU BELI
+                    LIHAT BUKU YANG SUDAH KAMU BELI
                 </h6>
             </div>
         </div>
