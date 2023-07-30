@@ -21,7 +21,7 @@ class XenditController extends Controller
     
             $transaction = Transaction::where('kode_pembayaran', $request->external_id)->first();
             $transaction->status = $request->status;
-            $transaction->payed_at = date('Y-m-d h:i:s');
+            $transaction->dibayar_pada = date('Y-m-d h:i:s');
             $transaction->update();
 
         }
