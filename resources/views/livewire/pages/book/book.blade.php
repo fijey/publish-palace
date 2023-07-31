@@ -160,7 +160,7 @@
                         @endif
                         <div class="mb-3">
                             <label for="cover" class="form-label">Cover</label>
-                            <input type="file" class="form-control" id="cover" wire:model.debounce.1000ms="cover" required>
+                            <input type="file" class="form-control" id="cover" wire:model.debounce.1000ms="cover" required wire:loading.attr="disabled">
                             @error('cover') <span class="text-danger mt-2">{{ $message }}</span> @enderror
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center">
@@ -172,7 +172,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="file_book" class="form-label">File Buku</label>
-                            <input type="file" class="form-control" id="file_book" wire:model.debounce.1000ms="file_book" required>
+                            <input type="file" class="form-control" id="file_book" wire:model.debounce.1000ms="file_book" required wire:loading.attr="disabled">
                             @error('file_book') <span class="text-danger mt-2">{{ $message }}</span> @enderror
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center">
@@ -182,6 +182,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>
                             <input type="text" class="form-control" id="harga" wire:model.debounce.1000ms="harga" required>
@@ -217,7 +218,7 @@
          
             <div class="modal-footer">
                  <button type="button" class="btn btn-secondary" wire:click="modal_toggle(false)">Tutup</button>
-                 <button type="button" class="btn btn-primary" wire:click="modal_save('profile')">Simpan</button>
+                 <button type="button" class="btn btn-primary" wire:click="modal_save('profile')" wire:loading.attr="disabled">Simpan</button>
             </div>
             </div>
             </div>

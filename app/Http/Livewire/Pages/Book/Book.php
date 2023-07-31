@@ -56,7 +56,6 @@ class Book extends Component
 
     protected $listeners = [
         'close-modal' => 'modal_toggle',
-        'upload:generatedSignedUrl' => 'updatingFileBook'
         // 'render' => 'render'
     ];
 
@@ -373,16 +372,16 @@ class Book extends Component
 
     ///loading component
 
-    public function updatingCover(){
-        $this->is_loading_cover = true;
-    }
-    public function updatedCover(){
-        $this->is_loading_cover = false;
-    }
-    public function updatingFileBook(){
-        $this->is_loading_book = true;
-    }
-    public function updatedFileBook(){
-        $this->is_loading_book = false;
-    }
+    // public function updatingCover(){
+    //     $this->is_loading_cover = true;
+    // }
+    // public function updatedCover(){
+    //     $this->is_loading_cover = false;
+    // }
+    // public function updatingFileBook(){
+    //     $this->is_loading_book = true;
+    // }
+    // public function updatedFileBook(){
+    //     $this->is_loading_book = false;
+    // }
 }
