@@ -84,6 +84,13 @@
     {{-- desktop --}}
     <section class="main container d-none d-md-block">
       <div class="profile-card mt-8 mx-auto bg-primary text-light">
+        <div class="col-12 d-flex justify-content-end" wire:click="show_wn()">
+          <span class="btn btn-sm btn-secondary">
+            Whats news ?
+          </span>
+        </div>
+        <div class="row">
+        </div>
           <div class="image">
             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png" alt="" class="profile-pic">
           </div>
@@ -301,6 +308,33 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" wire:click="modal_history()">Tutup</button>
+              </div>
+          </div>
+    </div>
+  </div>
+
+
+    {{-- Whats'news --}}
+    <div class="modal fade {{$is_show_wn == true ? 'show' : ''}}" style="{{$is_show_wn == true ? 'background-color: #00000073;display:block' : 'display:none'}}" id="modalBookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">Whats News ? </h5>
+                  <a class="close" role="button" data-dismiss="modal" aria-label="Close" wire:click="show_wn(false)">
+                      <span aria-hidden="true">&times;</span>
+                  </a>
+              </div>
+              <div class="modal-body">
+                <h2>New Update on 31-07-2023</h2>
+                <h6>1. Mode Dark Mode Telah Hadir</h6>
+                <p>Ketika Kamu Membaca Buku, di pilihan more action sekarang sudah ada mode dark. yeaayy.</p>
+                <h6>2. dashboard</h6>
+                <p>
+                  Penambahan Button Whats new, agar kamu tahu pembaharuan apa yang kami hadirkan
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" wire:click="show_wn()">Tutup</button>
               </div>
           </div>
     </div>

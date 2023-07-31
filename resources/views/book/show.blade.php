@@ -26,7 +26,38 @@
 <script>
   $(document).ready(function () {
     $('.btn-open').trigger('click');
+
+    let html = `
+    <div class="df-ui-btn df-ui-pagemode" title="Dark Mode" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> <!-- Ikon bulan untuk dark mode -->
+        <i class="fas fa-sun" style="display:none"></i><span class="p-1">Toggle Dark Mode</span>
+    </div>
+    `;
+
+    setTimeout(() => {
+      $('.more-container').append(html);
+      toggleDarkMode();
+    }, 2000);
   });
+
+  function toggleDarkMode() {
+        // Toggle class 'dark-mode' pada elemen body
+        document.body.classList.toggle('dark-mode');
+
+        // Mengatur tampilan ikon berdasarkan mode yang aktif
+        const moonIcon = document.querySelector('.fa-moon');
+        const sunIcon = document.querySelector('.fa-sun');
+        const canvas = document.querySelector('.df-3dcanvas');
+        if (document.body.classList.contains('dark-mode')) {
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'inline';
+            canvas.style.backgroundColor = "#000000db";
+        } else {
+            moonIcon.style.display = 'inline';
+            sunIcon.style.display = 'none';
+            canvas.style.backgroundColor = "#FFFFFFDB";
+        }
+    }
 </script>
 @endsection
 

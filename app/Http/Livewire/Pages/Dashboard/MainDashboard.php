@@ -15,6 +15,7 @@ class MainDashboard extends Component
     public $is_show = false;
     public $is_show_withdraw = false;
     public $is_show_history = false;
+    public $is_show_wn = false;
     public $user;
     public $data_book;
     public $data_book_transaction;
@@ -59,6 +60,9 @@ class MainDashboard extends Component
 
     public function modal_withdraw(){
         $this->is_show_withdraw = !$this->is_show_withdraw;
+    }
+    public function show_wn(){
+        $this->is_show_wn = !$this->is_show_wn;
     }
 
     public function modal_history(){

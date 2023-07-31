@@ -47,16 +47,36 @@
     
     
 
-    <footer class="footer bg-primary text-light">
-
-	    <div class="footer-bottom text-center py-3">
-
-	        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Publish Palace</small>
- 
-	    </div>
-	    
-    </footer>
+    <footer class="footer bg-primary text-light p-5">
+      <div class="container">
+          <div class="row text-light">
+              <div class="col-md-6">
+                  <h5 class="mb-4 text-light">Tentang Kami</h5>
+                  <p>Publish Palace adalah platform penerbitan buku online yang memungkinkan penulis untuk menerbitkan dan menjual buku secara digital.</p>
+              </div>
+              <div class="col-md-3 text-light">
+                  <h5 class="mb-4 text-light">Navigasi</h5>
+                  <ul class="list-unstyled text-light">
+                      <li><a href="#" class="text-light" onclick="scrollToClass('tentang-kami')">Tentang Kami</a></li>
+                      <li><a href="#" class="text-light" onclick="scrollToClass('fitur')">Fitur</a></li>
+                      <li><a href="#" class="text-light" onclick="scrollToClass('visi-misi')">Visi Misi</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-3 text-light">
+                  <h5 class="mb-4 text-light">Kontak Kami</h5>
+                  <ul class="list-unstyled">
+                      <li class="text-light">Email: info@publish-palace.online</li>
+                      {{-- <li>Telepon: 123-456-789</li> --}}
+                      <li class="text-light">Alamat: Majalaya, Kab Bandung</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom text-center py-3">
+          <small class="text-light">© 2023 Publish Palace. All rights reserved.</small>
+      </div>
+  </footer>
+  
        
     <!-- Javascript -->          
     <script src="{{asset('assets/dflip/js/libs/jquery.min.js')}}" type="text/javascript"></script>
@@ -96,6 +116,19 @@
             var element = $("#" + idName);
            element.hide();
         }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $('.nav-link').each(function (index, element) {
+          // element == this
+          $(this).click(function(){
+            $(document).find('.nav-link').removeClass('active');
+            $(this).addClass('active');
+          })
+          
+        });
+      });
     </script>
     @livewireScripts
 </body>

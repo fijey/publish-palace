@@ -54,23 +54,23 @@
                             @else
                               @if( !request()->is('/login'))
                                   <li class="nav-item">
-                                    <a role="button" class="nav-link" href="/dashboard">DASHBOARD</a>
+                                    <a role="button" class="nav-link {{request()->is('dashboard*') ? 'active' : ''}}" href="/dashboard">DASHBOARD</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a role="button" class="nav-link" href="/book">MY BOOK</a>
+                                    <a role="button" class="nav-link {{request()->is('book*') ? 'active' : ''}}" href="/book">MY BOOK</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a role="button" class="nav-link" href="/explore-book">EXPLORE BOOK</a>
+                                    <a role="button" class="nav-link {{request()->is('explore-book*') ? 'active' : ''}}" href="/explore-book">EXPLORE BOOK</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a role="button" class="nav-link" href="/purchased-book">PURCHASED BOOK</a>
+                                    <a role="button" class="nav-link {{request()->is('purchased-book*') ? 'active' : ''}}" href="/purchased-book">PURCHASED BOOK</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a role="button" class="nav-link" href="/transaction-book">TRANSACTION BOOK</a>
+                                    <a role="button" class="nav-link {{request()->is('transaction-book*') ? 'active' : ''}}" href="/transaction-book">TRANSACTION BOOK</a>
                                   </li>
                                   @if(Auth::user())
                                     <li class="nav-item ml-5">
-                                      <a role="button" class="nav-link btn btn-primary" href="/logout" style="width: 10rem">Logout</a>
+                                      <a role="button" class="nav-link btn btn-primary" href="/logout" style="width: 7rem">Logout</a>
                                     </li>
                                   @endif
                               @endif
