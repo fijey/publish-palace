@@ -34,10 +34,13 @@
     </div>
     `;
 
-    setTimeout(() => {
-      $('.more-container').append(html);
-      toggleDarkMode();
-    }, 2000);
+    let intervalId = setInterval(() => {
+      if ($('.more-container').length > 0) {
+        clearInterval(intervalId); // Hentikan interval jika elemen '.more-container' sudah ada
+        $('.more-container').append(html);
+        toggleDarkMode();
+      }
+    }, 1000);
   });
 
   function toggleDarkMode() {
