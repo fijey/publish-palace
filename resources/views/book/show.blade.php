@@ -29,7 +29,7 @@
 
     let html = `
     <div class="df-ui-btn df-ui-pagemode" title="Dark Mode" onclick="toggleDarkMode()">
-        <i class="fas fa-moon"></i> <!-- Ikon bulan untuk dark mode -->
+        <i class="fas fa-moon"></i>
         <i class="fas fa-sun" style="display:none"></i><span class="p-1">Toggle Dark Mode</span>
     </div>
     `;
@@ -37,6 +37,7 @@
     setTimeout(() => {
       $('.more-container').append(html);
     }, 3000);
+
     setTimeout(() => {
       toggleDarkMode();
     }, 4000);
