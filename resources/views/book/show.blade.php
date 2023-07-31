@@ -36,8 +36,10 @@
 
     setTimeout(() => {
       $('.more-container').append(html);
+    }, 3000);
+    setTimeout(() => {
       toggleDarkMode();
-    }, 2000);
+    }, 4000);
   });
 
   function toggleDarkMode() {
