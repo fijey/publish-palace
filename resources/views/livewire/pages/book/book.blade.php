@@ -266,7 +266,7 @@
                                 @if($purchased != null)
                                     <div class="col-sm-12 mt-4 mt-md-2 text-success">
                                         <p>Kamu Membeli Buku Ini Pada : {{$purchased->dibayar_pada}}</p>
-                                        <p>Terimakasih Sudash Support Penulis di Indonesia!</p>
+                                        <p>Terimakasih Sudah Support Penulis di Indonesia!</p>
                                     </div>
                                 @endif
                             </div>

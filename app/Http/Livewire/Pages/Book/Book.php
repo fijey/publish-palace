@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages\Book;
 
 use Livewire\Component;
 use App\Models\BookModel;
+use App\Models\BookView;
 use App\Models\Transaction;
 use Livewire\WithFileUploads; // Import namespace trait
 use DB;
@@ -116,6 +117,7 @@ class Book extends Component
     public function modal_detail_toggle($id = null){
         if($id != null){
             $detail= BookModel::where('id',$id)->first();
+            $this->insertBookView($id);
             $this->book_id = $detail->id;
             $this->user_id = $detail->user_id;
             $this->nama_penulis = $detail->nama_penulis;
@@ -135,7 +137,9 @@ class Book extends Component
 
             if($this->from != "myCollection"){
                 $this->purchased = Transaction::where('book_id', $detail->id)->where('user_id', Auth::user()->id)->where('status', 'PAID')->first() ?? null;
-                $this->is_free = true;
+                if($this->purchased){
+                    $this->is_free = true;
+                }
             }else{
                 $this->purchased = null;
             }
@@ -302,6 +306,7 @@ class Book extends Component
         $transaction = new Transaction;
         $transaction->book_id = $data->book_id;
         $transaction->user_id = $data->user_id;
+        $transaction->amount = $data->amount;
         $transaction->kode_pembayaran = $data->kode_pembayaran;
         $transaction->status = $create_invoice['status'];
         $transaction->url_pembayaran = $create_invoice['invoice_url'];
@@ -338,6 +343,17 @@ class Book extends Component
         $this->is_publikasi = null;
 
         $this->is_edit = false;
+    }
+
+    public function insertBookView($id){
+        $book = BookModel::find($id);
+
+        // Rekam view buku bersama dengan alamat IP pengguna
+        $ipAddress = request()->ip();
+        BookView::create([
+            'book_id' => $id,
+            'ip_address' => $ipAddress,
+        ]);
     }
 
 

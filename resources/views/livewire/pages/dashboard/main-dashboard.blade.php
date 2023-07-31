@@ -83,7 +83,7 @@
   </style>
     {{-- desktop --}}
     <section class="main container d-none d-md-block">
-        <div class="profile-card mt-8 mx-auto bg-primary text-light">
+      <div class="profile-card mt-8 mx-auto bg-primary text-light">
           <div class="image">
             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png" alt="" class="profile-pic">
           </div>
@@ -97,24 +97,31 @@
                   {{$user->description}}
              </div>
           </div>
+          <div class="row mt-3">
+            <div class="col-sm-12 col-md-4 info">
+              <h6 style="color: #fff">Buku Kamu Telah Dilihat</h6>
+              <span>{{$total_buku_dilihat}} x</span>
+            </div>
+            <div class="col-sm-12 col-md-4 info">
+              <h6 style="color: #fff">Buku Kamu Telah Dibeli</h6>
+              <span>{{$total_buku_dibeli}} x</span>
+            </div>
+            <div class="col-sm-12 col-md-4 info">
+              <h6 style="color: #fff">Total Hasil Penjualan Buku</h6>
+              <span>IDR. {{number_format($total_hasil_penjualan,2)}}</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a class="btn btn-secondary" wire:click="modal_toggle()">Edit Profile</a>
+            <a class="btn btn-success" wire:click="modal_withdraw()">Withdraw</a>
+          </div>
+
           <div class="row">
-            <div class="col-sm-12 col-md-4 info">
-              <h3 style="color: #fff">Following</h3>
-              <span>120</span>
-            </div>
-            <div class="col-sm-12 col-md-4 info">
-              <h3 style="color: #fff">Followers</h3>
-              <span>5000</span>
-            </div>
-            <div class="col-sm-12 col-md-4 info">
-              <h3 style="color: #fff">Posts</h3>
-              <span>209</span>
+            <div class="col-12 text-center">
+              <h4 class="text-light mb-4">Book Analytics</h4>
+              <h6 class="text-white">Coming soon</h6>
             </div>
           </div>
-          <div>
-            <a href="#" class="btn btn-secondary" wire:click="modal_toggle()">Edit Profile</a>
-          </div>
-        </div>
     </section>
 
     {{-- mobile --}}
@@ -139,28 +146,31 @@
             </div>
             <div class="row">
               <div class="col-6 mt-4 info">
-                <h3>Collection</h3>
-                <span>120</span>
+                <h6>Buku Kamu Telah Dilihat</h6>
+                <span>{{$total_buku_dilihat}} x</span>
               </div>
               <div class="col-6 mt-4 info">
-                <h3>Favorite</h3>
-                <span>5000</span>
+                <h6>Buku Kamu Telah Dibeli</h6>
+                <span>{{$total_buku_dibeli}} x</span>
               </div>
-              <div class="col-6 mt-4 info">
-                <h3>Like</h3>
-                <span>209</span>
-              </div>
-              <div class="col-6 mt-4 info">
-                <h3>Follower</h3>
-                <span>209</span>
+              <div class="col-12 text-center mt-4 info">
+                <h6>Total Hasil Penjualan</h6><br>
+                <span>{{number_format($total_hasil_penjualan,2)}}</span>
               </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class=" d-block">
                       <a href="#" class="btn btn-secondary" wire:click="modal_toggle()">Edit Profile</a>
+                      <a class="btn btn-success" wire:click="modal_withdraw()">Withdraw</a>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center">
+                <h4 class=" mb-4">Book Analytics</h4>
+                <h6 class="">Coming soon</h6>
+              </div>
             </div>
         </div>
     </section>
@@ -201,6 +211,51 @@
                     </div>
                     </form>   
     </x-modal>
+
+    <div class="modal fade {{$is_show_withdraw == true ? 'show' : ''}}" style="{{$is_show_withdraw == true ? 'background-color: #00000073;display:block' : 'display:none'}}" id="modalBookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">Withdraw Balance</h5>
+                  <a class="close" role="button" data-dismiss="modal" aria-label="Close" wire:click="modal_withdraw(false)">
+                      <span aria-hidden="true">&times;</span>
+                  </a>
+              </div>
+              <div class="modal-body">
+                  <form method="POST">
+
+                      <div class="form-group mb-3">
+                          <label for="saldo">Jumlah Saldo Kamu : </label>
+                          <span id="saldo">IDR {{number_format($total_hasil_penjualan,2)}}</span>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="amount">Amount</label>
+                          <input id="amount" type="number" class="form-control @error('amount') is-invalid @enderror" name="amount" required>
+                          @error('amount')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                      </div>
+  
+                      <div class="form-group">
+                          <label for="bank_account">Bank Account</label>
+                          <input id="bank_account" type="text" class="form-control @error('bank_account') is-invalid @enderror" name="bank_account" required>
+                          @error('bank_account')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                      </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" wire:click="modal_withdraw()">Tutup</button>
+                <button type="button" class="btn btn-primary" wire:click="request_withdraw()">request Withdraw</button>
+              </div>
+          </div>
+      </div>
+  
 
 
 </div>

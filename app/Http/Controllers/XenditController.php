@@ -34,7 +34,7 @@ class XenditController extends Controller
                 'invoice_paid' => ['whatsapp', 'sms', 'email'],
                 'invoice_expired' => ['whatsapp', 'sms', 'email'],
             ],
-            'success_redirect_url' => 'https://publish-palace.com/purchase-book-completed',
+            'success_redirect_url' => 'https://publish-palace.online/transaction-book',
             'failure_redirect_url' => 'https://www.google.com',
             'currency' => 'IDR',
             'items' => [

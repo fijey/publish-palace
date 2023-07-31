@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pages\LandingPage;
 use Livewire\Component;
 use DB;
 use App\Models\BookModel;
+use App\Models\BookView;
 use Livewire\WithFileUploads; // Import namespace trait
 use App\Http\Livewire\Helper\ToastHelper;
 use Auth;
@@ -51,6 +52,7 @@ class Main extends Component
     public function modal_detail_toggle($id = null){
         if($id != null){
             $detail= BookModel::where('id',$id)->first();
+            $this->insertBookView($id);
             $this->book_id = $detail->id;
             $this->user_id = $detail->user_id;
             $this->judul_buku = $detail->judul_buku;
@@ -77,6 +79,17 @@ class Main extends Component
         
         $this->hydrate();
         $this->render();
+    }
+
+    public function insertBookView($id){
+        $book = BookModel::find($id);
+
+        // Rekam view buku bersama dengan alamat IP pengguna
+        $ipAddress = request()->ip();
+        BookView::create([
+            'book_id' => $id,
+            'ip_address' => $ipAddress,
+        ]);
     }
 
     public function clearFields()
