@@ -41,7 +41,7 @@ class MainDashboard extends Component
             $queryBook = Transaction::where('book_id', $value->id)->where('status','PAID');
             $this->total_buku_dilihat += BookView::uniqueViewsCount($value->id);
             $this->total_buku_dibeli += $queryBook->count();
-            $this->total_hasil_penjualan += $queryBook->first()->amount ?? 0;
+            $this->total_hasil_penjualan += $queryBook->get()->sum('amount') ?? 0;
         }
 
     }
