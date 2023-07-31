@@ -106,7 +106,7 @@
               <h6 style="color: #fff">Buku Kamu Telah Dibeli</h6>
               <span>{{$total_buku_dibeli}} x</span>
             </div>
-            <div class="col-sm-12 col-md-4 info">
+            <div class="col-sm-12 col-md-4 info" role="button" wire:click="modal_history()">
               <h6 style="color: #fff">Total Hasil Penjualan Buku</h6>
               <span>IDR. {{number_format($total_hasil_penjualan,2)}}</span>
             </div>
@@ -153,7 +153,7 @@
                 <h6>Buku Kamu Telah Dibeli</h6>
                 <span>{{$total_buku_dibeli}} x</span>
               </div>
-              <div class="col-12 text-center mt-4 info">
+              <div class="col-12 text-center mt-4 info" role="button" wire:click="modal_history()">
                 <h6>Total Hasil Penjualan</h6><br>
                 <span>{{number_format($total_hasil_penjualan,2)}}</span>
               </div>
@@ -211,7 +211,8 @@
                     </div>
                     </form>   
     </x-modal>
-
+    
+    {{-- modal withdraw --}}
     <div class="modal fade {{$is_show_withdraw == true ? 'show' : ''}}" style="{{$is_show_withdraw == true ? 'background-color: #00000073;display:block' : 'display:none'}}" id="modalBookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -223,12 +224,12 @@
               </div>
               <div class="modal-body">
                   <form method="POST">
-
+  
                       <div class="form-group mb-3">
                           <label for="saldo">Jumlah Saldo Kamu : </label>
                           <span id="saldo">IDR {{number_format($total_hasil_penjualan,2)}}</span>
                       </div>
-
+  
                       <div class="form-group">
                           <label for="amount">Amount</label>
                           <input id="amount" type="number" class="form-control @error('amount') is-invalid @enderror" name="amount" required>
@@ -248,14 +249,62 @@
                               </span>
                           @enderror
                       </div>
+                  </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" wire:click="modal_withdraw()">Tutup</button>
-                <button type="button" class="btn btn-primary" wire:click="request_withdraw()">request Withdraw</button>
+                  <button type="button" class="btn btn-secondary" wire:click="modal_withdraw()">Tutup</button>
+                  <button type="button" class="btn btn-primary" wire:click="request_withdraw()">request Withdraw</button>
               </div>
           </div>
       </div>
+  </div>
   
 
+    {{-- modal history --}}
+    <div class="modal fade {{$is_show_history == true ? 'show' : ''}}" style="{{$is_show_history == true ? 'background-color: #00000073;display:block' : 'display:none'}}" id="modalBookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">Rekapan Pembelian Buku</h5>
+                  <a class="close" role="button" data-dismiss="modal" aria-label="Close" wire:click="modal_history(false)">
+                      <span aria-hidden="true">&times;</span>
+                  </a>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-12">
+                    @forelse ($data_book_transaction as $item)
+                      <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <strong>{{$item->kode_pembayaran}}</strong>
+                                </div>
+                                <div class="col-md-3">
+                                    Transaction Date: {{$item->created_at}}
+                                </div>
+                                <div class="col-md-3">
+                                    Status: {{$item->status}}
+                                </div>
+                                <div class="col-md-3">
+                                    {{-- <a class="btn btn-primary" wire:click="modal_detail_toggle({{$item->book_id}}, {{$item->id}})">View Details</a> --}}
+                                  Harga : {{number_format($item->amount,2)}}
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    @empty
+                        Belum Ada Pembelian Pada Buku Kamu
+                    @endforelse
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" wire:click="modal_history()">Tutup</button>
+              </div>
+          </div>
+    </div>
 
-</div>
+
+
+    </div>

@@ -14,8 +14,10 @@ class MainDashboard extends Component
 {
     public $is_show = false;
     public $is_show_withdraw = false;
+    public $is_show_history = false;
     public $user;
     public $data_book;
+    public $data_book_transaction;
     public $total_buku_dilihat = 0;
     public $total_buku_dibeli = 0;
     public $total_hasil_penjualan = 0;
@@ -28,6 +30,8 @@ class MainDashboard extends Component
     public function mount(){
         $this->user = Auth::user();
         $this->data_book = BookModel::where('user_id', Auth::user()->id)->get();
+        $this->data_book_transaction = BookModel::leftJoin('transactions', 'transactions.book_id', 'books.id')
+        ->where('books.user_id', Auth::user()->id)->where('transactions.status', 'PAID')->get();
         
         $this->total_buku_dilihat = 0;
         $this->total_buku_dibeli = 0;
@@ -55,6 +59,13 @@ class MainDashboard extends Component
 
     public function modal_withdraw(){
         $this->is_show_withdraw = !$this->is_show_withdraw;
+    }
+
+    public function modal_history(){
+        $this->data_book_transaction = BookModel::leftJoin('transactions', 'transactions.book_id', 'books.id')
+        ->where('books.user_id', Auth::user()->id)->where('transactions.status', 'PAID')->get();
+        $this->is_show_history = !$this->is_show_history;
+
     }
 
     public function request_withdraw(){
