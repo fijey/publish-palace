@@ -39,7 +39,7 @@
         <div class="container mt-8">
             <div class="row">
                 <div class="d-flex col-sm-12 justify-content-center col-md-12 justify-content-md-end w-100-sm">
-                    <input class="form-control" placeholder="Search" type="text" wire:model.debounce.1000ms="search">
+                    <input class="form-control" placeholder="Masukan Nama Buku Yang Kamu Cari" type="text" wire:model.debounce.1000ms="search">
                 </div>
                 <div class="d-flex col-sm-12 justify-content-center w-100-sm mt-5">
                     <div wire:loading wire:target="search" class="spinner-border text-primary" role="status">
