@@ -30,7 +30,7 @@ class MainDashboard extends Component
 
     public function mount(){
         $this->user = Auth::user();
-        $this->data_book = BookModel::where('user_id', Auth::user()->id)->where('is_publikasi', true)->get();
+        $this->data_book = BookModel::where('user_id', Auth::user()->id)->get();
         $this->data_book_transaction = BookModel::leftJoin('transactions', 'transactions.book_id', 'books.id')
         ->where('books.user_id', Auth::user()->id)->where('transactions.status', 'PAID')->get();
         

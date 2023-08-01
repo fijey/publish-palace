@@ -35,10 +35,10 @@ class Main extends Component
     //data
     public $data_books;
     public function mount(){
-        $this->data_books = DB::table('books')->get();
+        $this->data_books = DB::table('books')->where('is_publikasi', true)->get();
     }
     public function hydrate(){
-        $this->data_books = DB::table('books')->get();
+        $this->data_books = DB::table('books')->where('is_publikasi', true)->get();
     }
     public function render()
     {
