@@ -325,13 +325,24 @@
                   </a>
               </div>
               <div class="modal-body">
-                <h2>New Update on 31-07-2023</h2>
-                <h6>1. Mode Dark Mode Telah Hadir</h6>
-                <p>Ketika Kamu Membaca Buku, di pilihan more action sekarang sudah ada mode dark. yeaayy.</p>
-                <h6>2. dashboard</h6>
-                <p>
-                  Penambahan Button Whats new, agar kamu tahu pembaharuan apa yang kami hadirkan
-                </p>
+                <div class="update">
+                  <h2>New Update on 01-08-2023</h2>
+                  <h6>1. Fix bug Landing Page</h6>
+                  <p>buku yang status nya draft masih muncul di landing page</p>
+                  <h6>2. Pencarian Buku</h6>
+                  <p>
+                    Kini Kamu Bisa Menggunakan Fitur Pencarian untuk mencari buku kamu dengan cepat
+                  </p>
+                </div>
+                <div class="update">
+                  <h2>New Update on 31-07-2023</h2>
+                  <h6>1. Mode Dark Mode Telah Hadir</h6>
+                  <p>Ketika Kamu Membaca Buku, di pilihan more action sekarang sudah ada mode dark. yeaayy.</p>
+                  <h6>2. dashboard</h6>
+                  <p>
+                    Penambahan Button Whats new, agar kamu tahu pembaharuan apa yang kami hadirkan
+                  </p>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" wire:click="show_wn()">Tutup</button>

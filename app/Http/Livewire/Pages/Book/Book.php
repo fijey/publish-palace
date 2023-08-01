@@ -26,6 +26,7 @@ class Book extends Component
     public $is_loading_book = false;
 
     //init attribute
+    public $search;
     public $book_id;
     public $user_id;
     public $slug;
@@ -253,6 +254,26 @@ class Book extends Component
         $this->modal_toggle(false);
         $this->clearFields();
 
+    }
+
+    public function updatedSearch($value){
+        if($value != "" || $value != null){
+            //query buku
+            $queryDataBooks = DB::table('books')->whereRaw('LOWER(judul_buku) LIKE LOWER(?)', ['%'.$value.'%']);
+            if($this->from == "myCollection"){
+                $queryDataBooks->where('user_id', Auth::user()->id);
+            }else{
+                $queryDataBooks->where('is_publikasi',true);
+
+            }
+
+            if($this->from == "purchased"){
+                $queryDataBooks = DB::table('transactions')->whereRaw('LOWER(judul_buku) LIKE LOWER(?)', ['%'.$value.'%'])->where('status','PAID')->where('transactions.user_id', Auth::user()->id)
+                ->leftJoin('books', 'books.id', 'transactions.book_id');
+            }
+
+            $this->data_books = $queryDataBooks->get();
+        }
     }
 
 
